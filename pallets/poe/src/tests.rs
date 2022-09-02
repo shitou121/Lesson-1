@@ -19,6 +19,14 @@ fn create_claim_works(){
 }
 
 #[test]
+fn create_claim_Too_Long(){
+	new_test_ext().execute_with(|| {
+		let claim = vec![0,1,2,4,5,8];
+		assert_ok!(PoeModule::create_claim(Origin::signed(1), claim.clone()));
+	});
+}
+
+#[test]
 fn create_claim_failed_when_already_exist(){
 	new_test_ext().execute_with(|| {
 		let claim = vec![0,1];
